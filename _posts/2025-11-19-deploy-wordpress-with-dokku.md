@@ -52,6 +52,7 @@ $ mv latest wordpress
 ```
 ## Step 8: Adjust nginx configuration
 ```sh
+$ cd wordpress
 $ echo "# Disable directory listings
 autoindex off;
 
