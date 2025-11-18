@@ -1,8 +1,7 @@
 ---
-title:        "Deploy wordpress with dokku"
-# jekyll-seo-tag
+title:       "Deploy wordpress with dokku"
 description:  "How to deploy a wordpress with dokku"
-image:        "http://placehold.it/400x200"
+image:        ""
 author:       "sarbull"
 ---
 
