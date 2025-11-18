@@ -6,9 +6,10 @@ image:        "http://placehold.it/400x200"
 author:       "sarbull"
 ---
 
-## Step 1: Make sure you have dokku installed
+## Step 1: Make sure you have dokku installed on your server
 ```sh
-$ root@server:~# dokku --version
+$ ssh root@server
+root@server $ dokku --version
 dokku version 0.36.3
 ```
 ## Step 2: Install MariaDB plugin and create a database
