@@ -1,9 +1,11 @@
 ---
-title:        "Example content"
-# jekyll-seo-tag
-description:  "A short description of the page's content"
-image:        "http://placehold.it/400x200"
-author:       "jianjie"
+title: "Example content"
+description: "A preserved Kiko theme demonstration with sample typography and placeholder content."
+author: "jianjie"
+noindex: true
+robots: "noindex, follow"
+sitemap: false
+unlisted: true
 ---
 
 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper est in imperdiet molestie. Curabitur aliquet sem in ante venenatis.</p>

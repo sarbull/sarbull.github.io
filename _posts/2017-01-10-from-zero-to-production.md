@@ -1,41 +1,34 @@
 ---
-title:        "From zero to production"
-
-description:  ""
-image:        ""
-author:       "sarbull"
+title: "From zero to production: a web application release checklist"
+description: "Plan a web application release with version control, separate environments, automated builds, and an early deployment of a minimal application."
+author: "sarbull"
+tags: [deployment]
 ---
 
-Production is the environment where your customers acces your application. This is the place where they go in order to use your services and interact with your business.
+Production is the environment where customers access your application. Before building the first feature, I prefer to establish version control, separate environments, automated builds, and a repeatable deployment process. Deploying a minimal “Hello World” application first exercises that path before the project becomes more complex.
 
-It is important for you as a company to serve them your services in the best way possible.
+## Plan the application and its dependencies
 
-In at least 95% of your business flows users need to fulfill their requirements without any interruptions or unhandled errors that may occur and are not solvable by their input.
+Create a rough architecture plan for how the components will interact. Choose technologies for the requirements of the project and the experience of the team. A microservice architecture still needs those choices; it also introduces service boundaries and operational work.
 
-Considering this, there are some steps that you need to follow in order to achieve this.
+## Put the project in version control
 
-From my experience it is very important, at the beginning of the project, that you create or build a perfect setup for the application that you will release it for the customers.
+Track the application in Git or another version control system from the beginning. A recorded revision makes it easier to connect a deployed version to its source and to review changes before release.
 
-Days of manual deployment and manual restart are gone due to human errors, but also when releasing or deploying, customers have a time where they can't use your services so this may result in a bad user experience for them.
+For Rails, I use [a Rake task to generate the application version]({% post_url 2025-01-28-how-to-version-my-rails-application %}) from a version file and the Git revision.
 
-Of course, automation in deploying applications was a must and it is now used by all companies that want their users to have the best experience in production.
+## Separate development, test, and production
 
-Next, having these phases during you first release cycle will result a long term solution.
+Set up development, test, and production environments so you can develop the application, check its behavior, and then release it to customers. Keep environment-specific configuration separate from the application code.
 
-Create a raw architecture plan for how should components will interact with each other.
+## Automate builds and checks
 
-Your application must be versionable by any current tool that exists(git, svn..), this is one key setup phase that you need to adopt.
+Configure a build agent to run the build, unit tests, and integration tests when the project changes. The results should tell the team whether a revision can still be built and whether the checks passed.
 
-Choose your technologies that you are going to use, you can choose your technologies accordingly to your needs.
+Automating repetitive deployment steps also reduces opportunities for manual errors. The exact checks and release process depend on the application.
 
-Technologies are not even relevant anymore if you adopt a microservice api architecture.
+## Deploy a minimal application first
 
-Setup up three environments: production, test, development. Doing so you will be able to develop the application, testing it with all sorts of inputs and finally delivering it a to a production environment.
+After creating the basic architecture and build setup, deploy “Hello World” to production. This confirms that the initial build, configuration, and deployment path works; it does not prove the complete application is stable or ready for traffic.
 
-Setup build agents that on every change in the project, it runs the build, unit tests and integration tests and, tells you if the project is still buildable.
-
-These kind of build agents are the so called build validators, best of them out there are called Travis, TeamCity or Jenkins.
-
-After creating the raw architecture, choosing the technologies, setup the hooks for the build agents, figure out what the project is going to do, always deploy the "Hello World!" into production first.
-
-Deploying "Hello World!" into production will result in a first successful release with no issues at all. After having this T0 in your project you can now say that your application is stable and from here you can start your very own first feature of the app using this zero to production cycle.
+From that first successful release, build and deploy the first feature through the same cycle. For a self-hosted example, see [setting up Dokku on DigitalOcean]({% post_url 2017-01-17-create-your-own-paas-with-dokku-and-digitalocean %}).

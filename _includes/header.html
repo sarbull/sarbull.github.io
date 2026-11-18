@@ -1,0 +1,8 @@
+<header class="masthead">
+  <p class="masthead-title--small"><a href="{{ '/' | relative_url }}">{{ site.name | escape }}'s blog</a></p>
+  <nav class="masthead-nav" aria-label="Main navigation">
+    {% for nav in site.nav %}
+    <a href="{{ nav.href | relative_url }}"{% if page.url == nav.href %} aria-current="page"{% endif %}>{{ nav.name | escape }}</a>
+    {% endfor %}
+  </nav>
+</header>

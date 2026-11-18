@@ -1,34 +1,25 @@
 ---
 layout: default
+title: Web development tutorials and notes
+description: "JavaScript and CSS examples, Ruby on Rails notes, and Dokku deployment tutorials by sarbull. Browse practical guides with code and configuration examples."
 ---
-<header class="masthead clearfix">
-  <div class="pull-left avatar">
-    <a href="{{ site.baseurl }}/"><img src="https://avatars3.githubusercontent.com/u/1864112?v=3&s=460"></a>
-  </div>
-  <div class="pull-left">
-    <h1 class="masthead-title">
-      <a href="{{ site.baseurl }}/">{{ site.name }}<span>&#39;s blog</span></a>
-    </h1>
-    <nav class="masthead-nav">
-      {% for nav in site.nav %}
-      <a href="{{ nav.href }}">{{ nav.name }}</a>
-      {% endfor %}
-    </nav>
-  </div>
-</header>
-<div class="content list">
-{% if site.posts.size == 0 %}
-  <h2>No post found</h2>
-{% else %}
-{% for post in site.posts %}
-  <div class="list-item">
-    <h2 class="list-post-title">
-      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-    </h2>
-    <div class="list-post-date">
-      <time>{{ post.date | date_to_string }}</time>
-    </div>
-  </div>
-{% endfor %}
-{% endif %}
-</div>
+{% include header.html %}
+<main id="main-content" class="content list">
+  <header class="home-intro">
+    <img class="home-avatar" src="https://avatars3.githubusercontent.com/u/1864112?v=3&amp;s=160" alt="sarbull's GitHub avatar" width="80" height="80" decoding="async">
+    <h1>Web development tutorials and notes</h1>
+    <p>I’m <a href="{{ '/about/' | relative_url }}">sarbull</a>. I share code examples and notes on JavaScript, CSS, Ruby on Rails, WordPress, and deploying applications with Dokku.</p>
+  </header>
+  <section aria-labelledby="articles-title">
+    <h2 id="articles-title" class="section-title">Articles</h2>
+    {% for post in site.posts %}
+    {% unless post.unlisted or post.noindex %}
+    <article class="list-item">
+      <h3 class="list-post-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+      <p class="list-post-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%-d %B %Y' }}</time></p>
+      <p>{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | escape }}</p>
+    </article>
+    {% endunless %}
+    {% endfor %}
+  </section>
+</main>

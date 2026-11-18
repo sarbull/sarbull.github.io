@@ -25,7 +25,8 @@ html {
 }
 
 .content {
-  text-align:justify; 
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
 .avatar img {
@@ -222,6 +223,7 @@ pre {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
   margin: 0 0 1rem;
   border-radius: 5px;
 }
@@ -274,7 +276,7 @@ tbody tr:nth-child(odd) th {
     }
 
     span {
-      color: #ddd;
+      color: #666;
     }
 
   }
@@ -299,7 +301,7 @@ tbody tr:nth-child(odd) th {
     margin-bottom: 2rem;
 
     a {
-      color: #aaa;
+      color: #666;
       font-weight: 300;
       text-transform: lowercase;
       -webkit-transition: all .2s ease;
@@ -361,4 +363,82 @@ tbody tr:nth-child(odd) th {
   a {
     color: #333;
   }
+}
+
+.skip-link {
+  position: absolute;
+  top: -5rem;
+  left: 1rem;
+  padding: .5rem 1rem;
+  color: #fff;
+  background: #333;
+  z-index: 10;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+.home-intro {
+  margin-bottom: 2.5rem;
+}
+
+.home-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.section-title {
+  margin-bottom: 1.5rem;
+}
+
+.list-item {
+  margin-bottom: 2rem;
+}
+
+.list-post-title {
+  font-size: 1.5rem;
+}
+
+.list-post-date {
+  margin-bottom: .5rem;
+}
+
+.post-date {
+  margin-top: .75rem;
+  text-transform: none;
+}
+
+.related-posts,
+.comments,
+.site-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+}
+
+button {
+  padding: .6rem .8rem;
+  border: 1px solid #666;
+  border-radius: 4px;
+  color: #333;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #268bd2;
+  outline-offset: 3px;
 }

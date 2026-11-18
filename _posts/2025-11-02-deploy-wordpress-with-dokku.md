@@ -1,11 +1,16 @@
 ---
-title:       "Deploy wordpress with dokku"
-description:  "How to deploy a wordpress with dokku"
-image:        ""
-author:       "sarbull"
+title: "Deploy WordPress with Dokku and MariaDB"
+description: "Deploy WordPress on Dokku with a MariaDB database, persistent wp-content storage, environment-based configuration, and Nginx routing."
+author: "sarbull"
+tags: [deployment, dokku, wordpress]
+last_modified_at: 2026-11-18
 ---
 
-## Step 1: Make sure you have dokku installed on your server
+This walkthrough deploys WordPress to Dokku with a MariaDB database and persistent storage for plugins, uploads, and themes. It configures WordPress through environment variables and adds Nginx routes for PHP, static files, and the REST API.
+
+The commands below record a Dokku 0.36.3 setup. Start with an installed Dokku server, SSH access, and a local Git checkout. Adapt the PHP buildpack and Nginx configuration to your installed Dokku version; the `heroku-fcgi` upstream is specific to the buildpack used here.
+
+## Step 1: Check the installed Dokku version
 ```sh
 $ ssh root@server
 root@server $ dokku --version
@@ -32,7 +37,10 @@ $ mkdir /var/lib/dokku/data/storage/wordpress/wp-content/themes
 $ chown -R 32767:32767 /var/lib/dokku/data/storage/wordpress/wp-content
 $ dokku storage:mount wordpress /var/lib/dokku/data/storage/wordpress/wp-content:/app/wp-content
 ```
-## Step 6: Add ENV variables for application
+## Step 6: Add environment variables for WordPress
+
+Replace every example key and salt with its own generated secret before deploying. The [WordPress configuration guide](https://developer.wordpress.org/advanced-administration/wordpress/wp-config/) explains these settings and links to the WordPress salt generator.
+
 ```sh
 $ dokku config:set wordpress AUTH_KEY=auth-key \
   SECURE_AUTH_KEY=secure-auth-key \
@@ -46,13 +54,16 @@ $ dokku config:set wordpress AUTH_KEY=auth-key \
 ## Step 7: Download latest wordpress version
 ```sh
 $ curl -LO https://wordpress.org/latest.zip
-$ unzip latest
-$ mv latest wordpress
+$ unzip latest.zip
 ```
-## Step 8: Adjust nginx and wp-config.php
+## Step 8: Configure Nginx, PHP, and wp-config.php
+
+The quoted heredoc delimiters preserve PHP and Nginx variables such as `$host` and `$uri` when writing the configuration files.
+
 ```sh
 $ cd wordpress
-$ echo "# Disable directory listings
+cat <<'NGINX' > .nginx.conf
+# Disable directory listings
 autoindex off;
 
 # Set index files (WordPress needs index.php first)
@@ -113,17 +124,21 @@ location ~ /(readme\.html|license\.txt|wp-config\.php|wp-config-sample\.php|xmlr
     deny all;
     access_log off;
     log_not_found off;
-}" > .nginx.conf
+}
+NGINX
 ```
 ```sh
-$ echo "upload_max_filesize = 128M
+cat <<'PHP_INI' > custom_php.ini
+upload_max_filesize = 128M
 post_max_size = 128M
 max_execution_time = 600
 memory_limit = 256M
-max_input_time = 300" > custom_php.ini
+max_input_time = 300
+PHP_INI
 ```
 ```sh
-echo "<?php
+cat <<'PHP' > wp-config.php
+<?php
 /**
  * The base configuration for WordPress
  *
@@ -247,7 +262,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';" > wp-config.php
+require_once ABSPATH . 'wp-settings.php';
+PHP
 ```
 ## Step 9: Add git
 ```sh
@@ -255,11 +271,19 @@ $ git init
 $ git add .
 $ git commit -m "First commit"
 ```
-## Step 9: Hook it up to dokku server
+## Step 10: Add the Dokku Git remote
 ```sh
 $ git remote add dokku dokku@server:wordpress
 ```
-## Step 10: Deploy
+## Step 11: Deploy WordPress
 ```sh
 $ git push dokku main
 ```
+
+## Related documentation
+
+- [Dokku Git deployment](https://dokku.com/docs/deployment/methods/git/).
+- [Editing WordPress configuration](https://developer.wordpress.org/advanced-administration/wordpress/wp-config/).
+- [My earlier Dokku and DigitalOcean setup notes]({% post_url 2017-01-17-create-your-own-paas-with-dokku-and-digitalocean %}).
+
+**Correction, 18 November 2026:** fixed the WordPress archive extraction commands and used quoted heredocs so the shell preserves variables in generated configuration files. The full deployment has not been retested against newer Dokku releases.

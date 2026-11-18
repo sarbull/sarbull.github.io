@@ -1,26 +1,32 @@
 ---
-title: Using oh-my-zsh with scm_breeze
+title: "Using Oh My Zsh with SCM Breeze for Git shortcuts"
+description: "Set up Oh My Zsh with the Frisk theme and SCM Breeze, then use numbered file shortcuts to stage changes in Git."
+author: "sarbull"
+tags: [developer-tools, git]
+image: "/frisk-theme.png"
 ---
 
-## oh-my-zsh
-Oh-My-Zsh is an open source, community-driven framework for managing your ZSH configuration.
+Oh My Zsh manages Zsh configuration and themes. SCM Breeze adds numbered Git file shortcuts, so you can stage files by number instead of typing their paths. These are my setup notes for combining the two tools with the Frisk theme.
 
-### Installing oh-my-zsh
+## Install Oh My Zsh
+
+See the [Oh My Zsh installation instructions](https://ohmyz.sh/#install) for the supported installer and prerequisites.
+
 ```bash
 $ sudo apt-get install zsh # for Ubuntu
-$ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 $ vim ~/.zshrc # ZSH_THEME="frisk"
 ```
 
 ### "Frisk" theme
-![oh-my-zsh frisk theme](https://raw.githubusercontent.com/sarbull/sarbull.github.io/master/frisk-theme.png)
+![Git branch and working directory in the Oh My Zsh Frisk theme]({{ "/frisk-theme.png" | relative_url }}){: width="654" height="374" loading="lazy" decoding="async" }
 
 ## scm_breeze
-SCM Breeze is a set of shell scripts (for bash and zsh) that enhance your interaction with git.
+[SCM Breeze](https://github.com/scmbreeze/scm_breeze) is a set of shell scripts for Bash and Zsh that adds shortcuts for working with Git.
 
 ### Installing scm_breeze
 ```bash
-$ git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+$ git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 $ ~/.scm_breeze/install.sh
 ```
 ### Example scm_breeze commands

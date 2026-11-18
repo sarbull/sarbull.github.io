@@ -1,11 +1,15 @@
 ---
-title:        "A Simple Reset CSS"
-description:  ""
-image:        ""
-author:       "sarbull"
+title: "A Simple Reset CSS"
+description: "A CSS reset based on Eric Meyer’s reset stylesheet, with rules for margins, typography, tables, form controls, and keyboard focus."
+author: "sarbull"
+tags: [css]
 ---
 
-This `reset.css` is based on http://meyerweb.com/eric/tools/css/reset/.
+A CSS reset reduces differences in browser default styles before you add your own design. This `reset.css` is based on [Eric Meyer’s reset stylesheet](https://meyerweb.com/eric/tools/css/reset/), with additional rules for form controls and text selection.
+
+Treat it as a starting point: restore the typography, list markers, spacing, and visible keyboard focus that your interface needs.
+
+## Reset stylesheet
 
 ```css
 html, body, div, span, applet, object, iframe,
@@ -27,11 +31,6 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-}
-
-/* make sure to set some focus styles for accessibility */
-:focus {
-  outline: 0;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -368,3 +367,5 @@ textarea {
   resize: vertical;
 }
 ```
+
+For an example of CSS controlling form visibility, see [a two-step form without JavaScript]({% post_url 2025-02-03-html-and-css-but-without-javascript %}).

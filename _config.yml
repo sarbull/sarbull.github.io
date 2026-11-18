@@ -1,71 +1,70 @@
-# # # # # # # #
-#   K i k o   #
-# # # # # # # #
+# Site identity
+name: "sarbull"
+title: "sarbull"
+tagline: "Web development tutorials and notes"
+description: "Practical web development notes by sarbull on JavaScript, CSS, Ruby on Rails, WordPress, and deploying applications with Dokku."
+url: "https://sarbull.github.io"
+baseurl: ""
+lang: "en"
+locale: "en_US"
+timezone: "Europe/Bucharest"
 
-# Basic
-name:               "sarbull"
-description:        "webdeving around"
-
-# jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
-url:                "https://sarbull.github.io"
-author:             "sarbull"
+author:
+  name: "sarbull"
+  type: "Person"
+  url: "https://sarbull.github.io/about/"
 twitter:
-  username:         "sarbull"
-#facebook:
-#  app_id:           1234
-#    publisher:      1234
+  username: "sarbull"
+  card: "summary_large_image"
+social:
+  name: "sarbull"
+  links:
+    - "https://github.com/sarbull"
 
-# URL
-baseurl:            ""
-#baseurl:            "" #For Root Domain
-permalink:          /:year/:month/:day/:title/
-
+# Keep existing article addresses stable.
+permalink: /:year/:month/:day/:title/
 markdown: kramdown
-
 kramdown:
   auto_ids: true
   input: GFM
-  # use_coderay: false
-  # syntax_highlighter: none
   syntax_highlighter_opts:
     disable: true
 
-# Navigation
 nav:
-  - name:           "About"
-    href:           "/about"
+  - name: "Articles"
+    href: "/"
+  - name: "About"
+    href: "/about/"
+  - name: "RSS"
+    href: "/feed.xml"
 
-# Sass
 sass:
-  style:            :compressed
+  style: :compressed
 
-# Scopes
 defaults:
-  -
-    scope:
-      path:         ""
-      type:         "pages"
+  - scope:
+      path: ""
+      type: "pages"
     values:
-      layout:       "page"
-  -
-    scope:
-      path:         ""
-      type:         "posts"
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
     values:
-      layout:       "post"
+      layout: "post"
+      author: "sarbull"
+      comments: true
+      seo:
+        type: "BlogPosting"
 
-gems:
+plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
-webserver_headers:
-  - "Permissions-Policy: browsing-topics=*"
-  - "Test-Me: yes-please"
-
-# webserver_headers:
-  # - - Permissions-Policy
-    # - "interest-cohort=(browsing-topics)"
-    # browsing-topics=
-#  - - Access-Control-Allow-Origin
-#    - "*"
-#  - - Access-Control-Allow-Methods
-#    - GET, OPTIONS, HEAD
+# These development files should never become public site content.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts

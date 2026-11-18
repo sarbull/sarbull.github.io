@@ -1,10 +1,16 @@
 ---
-title:        "My VSCode config"
-description:  "JSON object with my VSCode configuration."
-author:       "sarbull"
+title: "My VS Code settings.json configuration"
+description: "My VS Code settings for two-space indentation, autosave, editor navigation, JavaScript formatting, and the Monokai Pro theme."
+author: "sarbull"
+tags: [developer-tools]
+image: "/my-vscode-extentions-list.png"
 ---
 
-## VSCode Config json file
+This is my VS Code `settings.json` configuration. It uses two-space indentation, autosave, visible whitespace, 80- and 120-character rulers, and Prettier for JavaScript formatting. Some entries depend on extensions, including Monokai Pro and ESLint.
+
+To apply individual settings, open your user or workspace `settings.json` and merge the entries you want to use. The [VS Code settings guide](https://code.visualstudio.com/docs/configure/settings) explains how user and workspace settings interact.
+
+## VS Code settings.json
 ```json
 {
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -56,6 +62,8 @@ author:       "sarbull"
 }
 ```
 
-## VSCode extensions list
+## VS Code extensions list
 
-![my vscode extentions list](https://raw.githubusercontent.com/sarbull/sarbull.github.io/master/my-vscode-extentions-list.png)
+![Extensions installed in my VS Code development environment]({{ "/my-vscode-extentions-list.png" | relative_url }}){: width="1434" height="1016" loading="lazy" decoding="async" }
+
+For terminal configuration, see [using Oh My Zsh with SCM Breeze]({% post_url 2016-12-05-using-zsh-with-scm-breeze %}).

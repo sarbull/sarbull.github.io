@@ -1,15 +1,16 @@
 ---
-title:        "Create your own PaaS with Dokku and DigitalOcean"
-description:  ""
-image:        ""
-author:       "sarbull"
+title: "Create your own PaaS with Dokku and DigitalOcean"
+description: "Historical setup notes for a Dokku PaaS on DigitalOcean: Ubuntu, swap space, PostgreSQL, and a Rails deployment through Git."
+author: "sarbull"
+tags: [deployment, dokku]
 ---
 
-## Description
-Dokku is the smallest PaaS implementation you've ever seen. It can be seen like a personal Heroku infrastructure.
+Dokku is a self-hosted platform as a service that deploys applications from Git. This walkthrough records an Ubuntu and DigitalOcean setup with PostgreSQL and a sample Rails application.
+
+**Historical setup:** the installer below is pinned to Dokku 0.10.5. For a new server, use the [current Dokku installation guide](https://dokku.com/docs/getting-started/installation/) and its supported operating systems and resource requirements.
 
 ## Create a DigitalOcean droplet
-Create a instance with the latest stable Ubuntu. It is recommended to use at least 1GB of RAM, but you can also use SWAP Memory to increase the RAM and since it's SSD it will work very fast.
+Create a DigitalOcean droplet with an Ubuntu release supported by the Dokku version you plan to install. Choose memory for your application and database workload; swap uses disk space and does not replace physical RAM.
 
 ## Install Dokku on Ubuntu
 ```bash
@@ -53,6 +54,11 @@ $ dokku postgres:link rails-database ruby-rails-sample
 ```bash
 $ git clone git@github.com:heroku/ruby-rails-sample.git
 $ cd ruby-rails-sample
-$ git remote add dokku dokku@DROLET_IP:ruby-rails-sample
+$ git remote add dokku dokku@DROPLET_IP:ruby-rails-sample
 $ git push dokku master
 ```
+
+## Related deployment notes
+
+- [Deploy WordPress with Dokku and MariaDB]({% post_url 2025-11-02-deploy-wordpress-with-dokku %}).
+- [Dokku Git deployment documentation](https://dokku.com/docs/deployment/methods/git/).

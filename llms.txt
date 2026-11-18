@@ -1,0 +1,24 @@
+---
+layout: null
+sitemap: false
+---
+# {{ site.title | default: site.name }}
+
+> {{ site.description }}
+
+Personal web development articles and code examples by sarbull. Articles keep their original publication dates; older tutorials may describe earlier software versions.
+
+## About the author
+
+- [About sarbull]({{ '/about/' | absolute_url }}): Topics covered on this blog and links to the author's work.
+- [GitHub profile](https://github.com/sarbull): Public repositories by sarbull.
+
+## Articles
+{% for post in site.posts %}{% unless post.unlisted or post.noindex %}
+- [{{ post.title }}]({{ post.url | absolute_url }}): {{ post.description | default: post.excerpt | strip_html | strip_newlines | strip }}
+{% endunless %}{% endfor %}
+## Discovery
+
+- [Blog home]({{ '/' | absolute_url }}): Browse all published articles.
+- [RSS feed]({{ '/feed.xml' | absolute_url }}): Subscribe to new articles.
+- [XML sitemap]({{ '/sitemap.xml' | absolute_url }}): Canonical URLs for search engine discovery.
